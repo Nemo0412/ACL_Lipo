@@ -1,0 +1,48 @@
+nohup: ignoring input
+[33m⚠️  Warning: 'huggingface-cli download' is deprecated. Use 'hf download' instead.[0m
+Fetching 22 files:   0%|          | 0/22 [00:00<?, ?it/s]Downloading 'README.md' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/5f30fab8d28766b25e2271fe5b471e50f3c3e185.incomplete'
+Downloading 'generation_config.json' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/f4d8698503667257881387c38cde9e77efe84c9b.incomplete'
+Downloading 'model-00001-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/9eb20fc87dca12a3dff5513178268874b086d582a80838d16f5ba78dd110e021.incomplete'
+Downloading 'config.json' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/707688588d8b9bf1068b4438f76387a45671bf42.incomplete'
+Downloading 'model-00003-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/2fa5b5ff4624a3f0abae5ffd600fe7f20151ca6c839495f74253d983ddecfdcf.incomplete'
+Downloading 'model-00002-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/86d3db5b65445d91075f293b406f28241ec174858dc405a2bc12dfe50698360c.incomplete'
+Downloading 'model-00004-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/5b8592563f2ad548c92fa7df61693ebbcfc9d048fb17448ef2e8635b21638c2a.incomplete'
+Downloading '.gitattributes' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/52373fe24473b1aa44333d318f578ae6bf04b49b.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/5f30fab8d28766b25e2271fe5b471e50f3c3e185
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/f4d8698503667257881387c38cde9e77efe84c9b
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/707688588d8b9bf1068b4438f76387a45671bf42
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/52373fe24473b1aa44333d318f578ae6bf04b49b
+Fetching 22 files:   5%|▍         | 1/22 [00:00<00:10,  2.01it/s]Downloading 'model-00005-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/96ff1f10c712791de75b0d482aaa5cf82ad14dda9bbce1a803f94a094f051ebb.incomplete'
+Downloading 'model-00006-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/7519ef6fddd0be41f64971d4ec872e2939fa974013e71379d8881cf9d0f4ee8b.incomplete'
+Downloading 'model-00007-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/fd5b4613e87730d8659c291ff0f50a9146aa39a6b3c4c1c15cedc08e97e1cfb1.incomplete'
+Downloading 'model-00008-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/6302e6b96aea46fbb36aaa810494465f7713381d97dffd7b7f65caa6bc397aca.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/9eb20fc87dca12a3dff5513178268874b086d582a80838d16f5ba78dd110e021
+Fetching 22 files:  23%|██▎       | 5/22 [02:15<08:09, 28.77s/it]Downloading 'model-00009-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/9b36045d8b56810da1e495592ea01f0a47223ee1dec0fa08da36be57b918e7f5.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/86d3db5b65445d91075f293b406f28241ec174858dc405a2bc12dfe50698360c
+Fetching 22 files:  27%|██▋       | 6/22 [02:18<06:05, 22.85s/it]Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/6302e6b96aea46fbb36aaa810494465f7713381d97dffd7b7f65caa6bc397aca
+Downloading 'model-00010-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/bfb41f73d24bb82ff157fa602e2bd474ecb2297c785d66887a6d9c879d60e03c.incomplete'
+Downloading 'model-00011-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/0340677a1343abec6d5bdc7e90e7af055532d136530d85f2eb91980fbca73146.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/96ff1f10c712791de75b0d482aaa5cf82ad14dda9bbce1a803f94a094f051ebb
+Downloading 'model-00012-of-00012.safetensors' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/03d2681a6cbb130f2bb129530f21aec87766a26cf0eeb61697d50d06db359af2.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/5b8592563f2ad548c92fa7df61693ebbcfc9d048fb17448ef2e8635b21638c2a
+Downloading 'model.safetensors.index.json' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/490d8bbe4e1566b008e98fc80b9f6dd107a1ebec.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/490d8bbe4e1566b008e98fc80b9f6dd107a1ebec
+Downloading 'special_tokens_map.json' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/8d6368f7e735fbe4781bf6e956b7c6ad0586df80.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/8d6368f7e735fbe4781bf6e956b7c6ad0586df80
+Downloading 'tdc_prompts.json' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/a87e41f1aedf74a6068a8825a7dd52b9c3492202.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/2fa5b5ff4624a3f0abae5ffd600fe7f20151ca6c839495f74253d983ddecfdcf
+Fetching 22 files:  32%|███▏      | 7/22 [02:27<04:49, 19.31s/it]Downloading 'tokenizer.json' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/3f289bc05132635a8bc7aca7aa21255efd5e18f3710f43e3cdb96bcd41be4922.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/a87e41f1aedf74a6068a8825a7dd52b9c3492202
+Downloading 'tokenizer.model' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/61a7b147390c64585d6c3543dd6fc636906c9af3865a5548f27f31aee1d4c8e2.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/61a7b147390c64585d6c3543dd6fc636906c9af3865a5548f27f31aee1d4c8e2
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/3f289bc05132635a8bc7aca7aa21255efd5e18f3710f43e3cdb96bcd41be4922
+Downloading 'tokenizer_config.json' to '/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/36ba12877e7efaba5252f7b17ab337a59d953563.incomplete'
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/36ba12877e7efaba5252f7b17ab337a59d953563
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/03d2681a6cbb130f2bb129530f21aec87766a26cf0eeb61697d50d06db359af2
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/fd5b4613e87730d8659c291ff0f50a9146aa39a6b3c4c1c15cedc08e97e1cfb1
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/9b36045d8b56810da1e495592ea01f0a47223ee1dec0fa08da36be57b918e7f5
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/0340677a1343abec6d5bdc7e90e7af055532d136530d85f2eb91980fbca73146
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/bfb41f73d24bb82ff157fa602e2bd474ecb2297c785d66887a6d9c879d60e03c
+Download complete. Moving file to /root/.cache/huggingface/hub/models--google--txgemma-27b-chat/blobs/7519ef6fddd0be41f64971d4ec872e2939fa974013e71379d8881cf9d0f4ee8b
+Fetching 22 files:  45%|████▌     | 10/22 [48:27<1:37:00, 485.05s/it]Fetching 22 files: 100%|██████████| 22/22 [48:27<00:00, 132.17s/it]  
+/root/.cache/huggingface/hub/models--google--txgemma-27b-chat/snapshots/1e0e71c586dc7bf63e5c7cef7b26e6bcc4d3fa0d

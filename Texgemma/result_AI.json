@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "smiles": "CCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1",
+    "name": "C18-Imidazole-Ester-Amide-1",
+    "design_rationale": "Similar to example 3 and 4, with a C18 saturated chain, imidazole ring, ester and amide linkages.",
+    "predicted_score": 9
+  },
+  {
+    "id": 2,
+    "smiles": "CCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)NC1=CNN=C1",
+    "name": "C20-Imidazole-Ester-Amide-1",
+    "design_rationale": "Similar to example 3 and 4, but with a longer C20 saturated chain.",
+    "predicted_score": 9
+  },
+  {
+    "id": 3,
+    "smiles": "CCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1",
+    "name": "C18-Imidazole-Ester-Amide-2",
+    "design_rationale": "Similar to example 3 and 4, but with a C18 saturated chain and the imidazole ring moved to the terminal end.",
+    "predicted_score": 9
+  },
+  {
+    "id": 4,
+    "smiles": "CCCCC(C)CCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1",
+    "name": "C16-Imidazole-Ester-Amide-Branched",
+    "design_rationale": "Similar to example 3, but with a branched C16 chain.",
+    "predicted_score": 9
+  },
+  {
+    "id": 6,
+    "smiles": "CCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)N(C)C1=CNN=C1",
+    "name": "C18-Imidazole-Ester-Amide-N-Methyl",
+    "design_rationale": "Similar to example 3 but with an N-methyl group on the imidazole ring.",
+    "predicted_score": 9
+  },
+  {
+    "id": 7,
+    "smiles": "CCCCCCCCCC(=O)OCCCCCC(NC1=CNN=C1)C(=O)NCCCCCCCCCCC",
+    "name": "C18-Imidazole-Ester-Amide-3",
+    "design_rationale": "Similar to example 2 but with a C18 chain and a saturated tail.",
+    "predicted_score": 8
+  },
+  {
+    "id": 8,
+    "smiles": "CC(C)CCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)NC1=CNN=C1",
+    "name": "C16-Imidazole-Ester-Amide-Cyclopropyl",
+    "design_rationale": "Similar to example 3, but with a cyclopropyl group attached to the C16 chain.",
+    "predicted_score": 8
+  },
+  {
+    "id": 9,
+    "smiles": "CCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCCCCC)NC1=CNN(C)C=1",
+    "name": "C20-Imidazole-Ester-Amide-N-Phenyl",
+    "design_rationale": "Similar to example 3, but with a C20 chain and an N-phenyl group on the imidazole ring.",
+    "predicted_score": 8
+  },
+  {
+    "id": 10,
+    "smiles": "CCCCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1",
+    "name": "C18-Imidazole-Ester-Amide-Unsaturated",
+    "design_rationale": "Similar to examples but with one unsaturated bond (C=C) in the main chain for improved membrane fluidity.",
+    "predicted_score": 9
+  },
+  {
+    "id": 11,
+    "smiles": "CCCCCCCCNC(=O)C(CCCCCOC(=O)CCC(C)CCCCC)NCCN1CCCC1",
+    "name": "C18-Imidazoline-Ester-Branched",
+    "design_rationale": "Contains imidazoline ring (like example 1), branched ester chain, and secondary amines for endosomal escape.",
+    "predicted_score": 10
+  }
+]

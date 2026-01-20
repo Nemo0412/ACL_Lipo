@@ -1,0 +1,2 @@
+'(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /google/txgemma-9b-chat/resolve/main/tokenizer_config.json (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0xf4c3c6093650>: Failed to establish a new connection: [Errno 101] Network is unreachable'))"), '(Request ID: 6f550843-cbb0-48fd-bbc9-f6ab541eda10)')' thrown while requesting HEAD https://huggingface.co/google/txgemma-9b-chat/resolve/main/tokenizer_config.json
+Retrying in 1s [Retry 1/5].

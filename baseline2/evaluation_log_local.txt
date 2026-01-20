@@ -1,0 +1,20 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Using device: cuda:0
+
+Loading model from: /tmp/txgemma-9b-chat
+Note: This is Google's TXGemma-9B chat model
+Loading tokenizer...
+Loading model (this may take a while if downloading missing files)...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:01,  2.11it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.87it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:01<00:00,  1.75it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.94it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.91it/s]
+Model loaded on cuda:0
+
+====================================================================================================
+Evaluating Google Gemma-2-9B-IT Model on Our Test Data
+====================================================================================================
+
+### EFFICIENCY EVALUATION ###
+Loading efficiency test data...
+Loaded 600 efficiency test samples
+
+Evaluating 600 samples...
+  0%|          | 0/600 [00:00<?, ?it/s]  0%|          | 1/600 [00:06<1:07:54,  6.80s/it]

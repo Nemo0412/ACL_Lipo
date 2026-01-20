@@ -1,0 +1,19 @@
+================================================================================
+加载TXGemma-27B模型
+================================================================================
+Traceback (most recent call last):
+  File "/mnt/3fs/dots-pretrain/leshu/workspace/Texgemma/generate_lipids_v4.py", line 23, in <module>
+    tokenizer = AutoTokenizer.from_pretrained(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/auto/tokenization_auto.py", line 1140, in from_pretrained
+    return tokenizer_class.from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py", line 2157, in __getattribute__
+    requires_backends(cls, cls._backends)
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py", line 2143, in requires_backends
+    raise ImportError("".join(failed))
+ImportError: 
+GemmaTokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+

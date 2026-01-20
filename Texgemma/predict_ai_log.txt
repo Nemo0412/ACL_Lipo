@@ -1,0 +1,85 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+================================================================================
+加载TXGemma-27B模型
+================================================================================
+Loading checkpoint shards:   0%|          | 0/12 [00:00<?, ?it/s]Loading checkpoint shards:   8%|▊         | 1/12 [00:00<00:07,  1.46it/s]Loading checkpoint shards:  17%|█▋        | 2/12 [00:01<00:06,  1.43it/s]Loading checkpoint shards:  25%|██▌       | 3/12 [00:02<00:06,  1.43it/s]Loading checkpoint shards:  33%|███▎      | 4/12 [00:02<00:05,  1.54it/s]Loading checkpoint shards:  42%|████▏     | 5/12 [00:03<00:04,  1.46it/s]Loading checkpoint shards:  50%|█████     | 6/12 [00:04<00:03,  1.53it/s]Loading checkpoint shards:  58%|█████▊    | 7/12 [00:04<00:03,  1.50it/s]Loading checkpoint shards:  67%|██████▋   | 8/12 [00:05<00:02,  1.63it/s]Loading checkpoint shards:  75%|███████▌  | 9/12 [00:05<00:01,  1.55it/s]Loading checkpoint shards:  83%|████████▎ | 10/12 [00:06<00:01,  1.42it/s]Loading checkpoint shards:  92%|█████████▏| 11/12 [00:07<00:00,  1.57it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:07<00:00,  2.09it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:07<00:00,  1.63it/s]
+✓ 模型加载完成
+
+读取了 10 个AI生成的lipid分子
+
+================================================================================
+开始预测效率分数和理由
+================================================================================
+
+[1/10] 预测 Lipid ID=1...
+  SMILES: CCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+  ✓ Score: 3, Reason length: 99 chars
+
+[2/10] 预测 Lipid ID=2...
+  SMILES: CCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)NC1=CNN=C1...
+  ✓ Score: 3, Reason length: 94 chars
+
+[3/10] 预测 Lipid ID=3...
+  SMILES: CCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+  ✓ Score: 3, Reason length: 75 chars
+
+  [已保存进度: 3/10]
+
+[4/10] 预测 Lipid ID=4...
+  SMILES: CCCCC(C)CCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+  ✓ Score: 3, Reason length: 196 chars
+
+[5/10] 预测 Lipid ID=6...
+  SMILES: CCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)N(C)C1=CNN=...
+  ✓ Score: 2, Reason length: 107 chars
+
+[6/10] 预测 Lipid ID=7...
+  SMILES: CCCCCCCCCC(=O)OCCCCCC(NC1=CNN=C1)C(=O)NCCCCCCCCCCC...
+  ✓ Score: 3, Reason length: 184 chars
+
+  [已保存进度: 6/10]
+
+[7/10] 预测 Lipid ID=8...
+  SMILES: CC(C)CCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)NC1=CNN=C1...
+  ✓ Score: 3, Reason length: 108 chars
+
+[8/10] 预测 Lipid ID=9...
+  SMILES: CCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCCCCC)NC1=CN...
+  ✓ Score: 3, Reason length: 123 chars
+
+[9/10] 预测 Lipid ID=10...
+  SMILES: CCCCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+  ✓ Score: 3, Reason length: 235 chars
+
+  [已保存进度: 9/10]
+
+[10/10] 预测 Lipid ID=11...
+  SMILES: CCCCCCCCNC(=O)C(CCCCCOC(=O)CCC(C)CCCCC)NCCN1CCCC1...
+  ✓ Score: 4, Reason length: 108 chars
+
+================================================================================
+预测完成！
+================================================================================
+
+结果已保存到: result_AI_predicted.json
+
+分数分布:
+  分数 2: 1 个
+  分数 3: 8 个
+  分数 4: 1 个
+
+前3个预测示例:
+
+ID 1: Score=3
+SMILES: CCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+Reason: This molecule exhibits several structural features that are suboptimal for efficient mRNA delivery:...
+
+ID 2: Score=3
+SMILES: CCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)NC1=CNN=C1...
+Reason: This molecule is unlikely to be a good mRNA delivery vehicle due to several structural issues:...
+
+ID 3: Score=3
+SMILES: CCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+Reason: This molecule is unlikely to be a good mRNA transfection agent. Here's why:...
+
+完成!

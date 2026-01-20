@@ -1,0 +1,65 @@
+nohup: ignoring input
+`torch_dtype` is deprecated! Use `dtype` instead!
+======================================================================
+药物效率分数预测系统 - RDKit + Qwen 理由生成版本
+======================================================================
+✓ RDKit 已安装
+测试模式: 是
+测试数量: 10
+======================================================================
+
+正在加载 Qwen 模型...
+Loading checkpoint shards:   0%|          | 0/17 [00:00<?, ?it/s]Loading checkpoint shards:   6%|▌         | 1/17 [00:00<00:02,  6.81it/s]Loading checkpoint shards:  12%|█▏        | 2/17 [00:00<00:02,  5.49it/s]Loading checkpoint shards:  18%|█▊        | 3/17 [00:00<00:02,  5.18it/s]Loading checkpoint shards:  24%|██▎       | 4/17 [00:00<00:02,  5.02it/s]Loading checkpoint shards:  29%|██▉       | 5/17 [00:00<00:02,  4.95it/s]Loading checkpoint shards:  35%|███▌      | 6/17 [00:01<00:02,  4.89it/s]Loading checkpoint shards:  41%|████      | 7/17 [00:01<00:02,  4.85it/s]Loading checkpoint shards:  47%|████▋     | 8/17 [00:01<00:01,  4.87it/s]Loading checkpoint shards:  53%|█████▎    | 9/17 [00:01<00:01,  4.91it/s]Loading checkpoint shards:  59%|█████▉    | 10/17 [00:02<00:01,  4.91it/s]Loading checkpoint shards:  65%|██████▍   | 11/17 [00:02<00:01,  4.90it/s]Loading checkpoint shards:  71%|███████   | 12/17 [00:02<00:01,  4.89it/s]Loading checkpoint shards:  76%|███████▋  | 13/17 [00:02<00:00,  4.88it/s]Loading checkpoint shards:  82%|████████▏ | 14/17 [00:02<00:00,  4.88it/s]Loading checkpoint shards:  88%|████████▊ | 15/17 [00:03<00:00,  4.86it/s]Loading checkpoint shards:  94%|█████████▍| 16/17 [00:03<00:00,  4.86it/s]Loading checkpoint shards: 100%|██████████| 17/17 [00:03<00:00,  5.40it/s]Loading checkpoint shards: 100%|██████████| 17/17 [00:03<00:00,  5.04it/s]
+✓ Qwen 模型加载完成
+
+加载数据...
+总药物数: 2588
+测试模式: 只处理前 10 个药物
+
+开始处理...
+处理药物 1 (分数: 7.5) - 生成理由中...
+处理药物 2 (分数: 7.0) - 生成理由中...
+处理药物 3 (分数: 6.0) - 生成理由中...
+处理药物 4 (分数: 5.5) - 生成理由中...
+处理药物 5 (分数: 5.5) - 生成理由中...
+处理药物 6 (分数: 5.5) - 生成理由中...
+处理药物 7 (分数: 5.5) - 生成理由中...
+处理药物 8 (分数: 5.5) - 生成理由中...
+处理药物 9 (分数: 5.5) - 生成理由中...
+处理药物 10 (分数: 5.5) - 生成理由中...
+
+======================================================================
+处理完成！
+======================================================================
+总处理时间: 140.85 秒
+平均每个药物: 14.08 秒
+成功处理: 10 个药物
+结果已保存到: ../data/efficiency_scores_rdkit_with_reasoning.json
+
+分数分布:
+  7.5分: 1 个 (10.0%)
+  7.0分: 1 个 (10.0%)
+  6.0分: 1 个 (10.0%)
+  5.5分: 7 个 (70.0%)
+
+======================================================================
+Top 3 药物及预测理由:
+======================================================================
+
+1. 药物 1 - 分数: 7.5/10
+   SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCC)=O)=O)CCC(OCCCCOC(CCCCC)=O)=O...
+   MW: 573.7, logP: 4.1, TPSA: 134.7
+   理由: Due to the presence of ester and amide functional groups at the head and multiple moderate-length alkyl chains (C6) at the tail, along with a molecular weight of 573.7 Da, high TPSA (134.7 Å²), and a significant number of rotatable bonds (26), the molecule exhibits reduced membrane permeability and increased potential for metabolic instability. While the lipophilicity is within an acceptable range (logP = 4.1), the elevated number of H-bond acceptors (11) and rotatable bonds suggest challenges with absorption and distribution. These factors contribute to a score of 7.5/10, indicating that while the molecule has some favorable characteristics, it may require optimization to improve its pharmacokinetic profile.
+----------------------------------------------------------------------
+
+2. 药物 2 - 分数: 7.0/10
+   SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCC)=O)=O)CCC(OCCCCOC(CCCCCC)=O)=O...
+   MW: 601.8, logP: 4.9, TPSA: 134.7
+   理由: Due to the presence of ester and amide groups at the head, which enhance solubility and stability, and the extended alkyl chains (C6) at the tail contributing to lipophilicity (logP = 4.9), the molecule exhibits favorable membrane permeability. However, the high molecular weight (601.8 Da) and numerous rotatable bonds (28) negatively impact absorption and metabolic stability, leading to potential issues with oral bioavailability. The topological polar surface area (TPSA = 134.7 ų) is nearly at the upper limit for optimal absorption. These factors collectively result in a score of 7.0/10, indicating a balance between favorable and unfavorable pharmacokinetic properties.
+----------------------------------------------------------------------
+
+3. 药物 3 - 分数: 6.0/10
+   SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCC)=O)=...
+   MW: 629.8, logP: 5.7, TPSA: 134.7
+   理由: Due to the presence of multiple ester and amide functional groups at the head and extended alkyl chains (C6) at the tail, the molecule exhibits a high molecular weight of 629.8 Da and a lipophilicity of 5.7, which are both outside the ideal ranges. These features enhance its lipophilicity and potentially improve membrane permeability; however, they also increase the risk of metabolic instability and poor solubility. Additionally, the molecule has 30 rotatable bonds, indicating significant flexibility that could hinder its absorption and distribution. The TPSA value of 134.7 Ų suggests acceptable polar surface area for some biological interactions. Overall, these factors contribute to moderate pharmacokinetic properties, resulting in a score of 6.0/10.
+----------------------------------------------------------------------

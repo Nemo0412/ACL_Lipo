@@ -1,0 +1,35 @@
+# Checkpoint files and directories
+*ckpt*
+checkpoint*
+*.ckpt
+checkpoints/
+
+# Virtual environments
+*_venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Large model files
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# Compiled files
+*.so
+*.whl
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/

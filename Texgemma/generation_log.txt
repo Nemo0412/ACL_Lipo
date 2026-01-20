@@ -1,0 +1,75 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+================================================================================
+加载TXGemma-27B模型
+================================================================================
+Loading checkpoint shards:   0%|          | 0/12 [00:00<?, ?it/s]Loading checkpoint shards:   8%|▊         | 1/12 [00:00<00:07,  1.43it/s]Loading checkpoint shards:  17%|█▋        | 2/12 [00:01<00:07,  1.40it/s]Loading checkpoint shards:  25%|██▌       | 3/12 [00:02<00:06,  1.40it/s]Loading checkpoint shards:  33%|███▎      | 4/12 [00:02<00:05,  1.52it/s]Loading checkpoint shards:  42%|████▏     | 5/12 [00:03<00:04,  1.45it/s]Loading checkpoint shards:  50%|█████     | 6/12 [00:04<00:03,  1.52it/s]Loading checkpoint shards:  58%|█████▊    | 7/12 [00:04<00:03,  1.50it/s]Loading checkpoint shards:  67%|██████▋   | 8/12 [00:05<00:02,  1.63it/s]Loading checkpoint shards:  75%|███████▌  | 9/12 [00:05<00:01,  1.56it/s]Loading checkpoint shards:  83%|████████▎ | 10/12 [00:06<00:01,  1.44it/s]Loading checkpoint shards:  92%|█████████▏| 11/12 [00:07<00:00,  1.59it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:07<00:00,  2.12it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:07<00:00,  1.63it/s]
+✓ 模型加载完成
+
+================================================================================
+生成10个高效ionizable lipid结构
+================================================================================
+
+正在生成... (这可能需要几分钟)
+================================================================================
+模型响应:
+================================================================================
+```json
+[
+  {
+    "id": 1,
+    "smiles": "C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1",
+    "name": "Tetra-C12-Lysine",
+    "design_rationale": "Four C12 alkyl chains provide good hydrophobic interactions. Tertiary amines in lysine head groups promote endosomal escape. Ester linkages allow for biodegradation.",
+    "predicted_score": 9
+  },
+  {
+    "id": 2,
+    "smiles": "C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1",
+    "name": "Tetra-C14-Lysine",
+    "design_rationale": "Similar to Tetra-C12-Lysine, but with longer C14 chains for potentially enhanced hydrophobic interactions.",
+    "predicted_score": 9
+  },
+  {
+    "id": 3,
+    "smiles": "C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.FC(F)(F)C(O)=O",
+    "name": "Tetra-C12-Lysine-Fluorinated",
+    "design_rationale": "Fluorinated chain improves lipophilicity and potentially enhances cellular uptake.",
+    "predicted_score": 9
+  },
+  {
+    "id": 4,
+    "smiles": "C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(N(CC)C(C)C)(C)C",
+    "name": "Tetra-C12-Lysine-Branched",
+    "design_rationale": "Branching in the alkyl chains can increase membrane fluidity and improve nanoparticle formation.",
+    "predicted_score": 9
+  },
+  {
+    "id": 5,
+    "smiles": "C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1",
+    "name": "Penta-C12-Lysine",
+    "design_rationale": "Five C12 chains for increased hydrophobic interactions and potentially higher encapsulation efficiency.",
+    "predicted_score": 10
+  },
+  {
+    "id": 6,
+    "smiles": "C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1.C(OC(N(C)C)=O)(=O)C1C=CC=CC=1",
+    "name": "Hexa-C10-Lysine",
+    "design_rationale": "Six C10 chain
+
+================================================================================
+成功解析 10 个lipid结构
+================================================================================
+⚠ Lipid 1: SMILES包含点号，跳过
+⚠ Lipid 2: SMILES包含点号，跳过
+⚠ Lipid 3: SMILES包含点号，跳过
+⚠ Lipid 4: SMILES包含点号，跳过
+⚠ Lipid 5: SMILES包含点号，跳过
+⚠ Lipid 6: SMILES包含点号，跳过
+⚠ Lipid 7: SMILES包含点号，跳过
+⚠ Lipid 8: SMILES包含点号，跳过
+⚠ Lipid 9: SMILES包含点号，跳过
+⚠ Lipid 10: SMILES包含点号，跳过
+✗ 没有有效的SMILES结构
+原始响应已保存到 result_AI_raw.txt
+
+完成!

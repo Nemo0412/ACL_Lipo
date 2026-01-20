@@ -1,0 +1,42 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+================================================================================
+Test Molecule ID: 1
+SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCC)=O)=O)CCC(OCCCCOC(CCCCC)=O)=O
+================================================================================
+
+Loading model...
+Loading checkpoint shards:   0%|          | 0/12 [00:00<?, ?it/s]Loading checkpoint shards:   8%|▊         | 1/12 [00:00<00:05,  2.04it/s]Loading checkpoint shards:  17%|█▋        | 2/12 [00:01<00:05,  1.93it/s]Loading checkpoint shards:  25%|██▌       | 3/12 [00:01<00:04,  1.94it/s]Loading checkpoint shards:  33%|███▎      | 4/12 [00:02<00:04,  1.92it/s]Loading checkpoint shards:  42%|████▏     | 5/12 [00:02<00:03,  1.95it/s]Loading checkpoint shards:  50%|█████     | 6/12 [00:03<00:03,  1.96it/s]Loading checkpoint shards:  58%|█████▊    | 7/12 [00:03<00:02,  1.93it/s]Loading checkpoint shards:  67%|██████▋   | 8/12 [00:04<00:02,  1.89it/s]Loading checkpoint shards:  75%|███████▌  | 9/12 [00:04<00:01,  1.91it/s]Loading checkpoint shards:  83%|████████▎ | 10/12 [00:05<00:01,  1.90it/s]Loading checkpoint shards:  92%|█████████▏| 11/12 [00:05<00:00,  1.91it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:05<00:00,  2.07it/s]
+✓ Model loaded
+
+PROMPT:
+--------------------------------------------------------------------------------
+<start_of_turn>user
+Predict the mRNA transfection efficiency (1-10 score) for this lipid molecule:
+
+SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCC)=O)=O)CCC(OCCCCOC(CCCCC)=O)=O
+
+Features: 2 tails, linker length 4
+
+Provide:
+Efficiency Score: [1-10]
+Reason: [Brief explanation]<end_of_turn>
+<start_of_turn>model
+
+--------------------------------------------------------------------------------
+
+Generating response...
+
+MODEL RESPONSE:
+================================================================================
+## Efficiency Score: 3
+
+## Reason:
+
+While the molecule possesses two tails and a linker length of 4, which are generally considered favorable features for mRNA transfection, there are some drawbacks:
+
+* **Hydrophobicity:** The molecule is highly hydrophobic due to the presence of six carbon chains in both tails. This excessive hydrophobicity can lead to aggregation and poor solubility in aqueous solutions, hindering efficient complex formation with mRNA and cellular uptake.
+* **Lack of cationic charges:**  The absence of cationic charges, which are crucial for electrostatic interactions with the negatively charged mRNA backbone, significantly reduces its ability to encapsulate and deliver the mRNA effectively. 
+
+Therefore, despite having two tails and a suitable linker length, the excessive hydrophobicity and lack of cationic charges are likely to negatively impact the transfection efficiency of this lipid molecule. 
+
+================================================================================

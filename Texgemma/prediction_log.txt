@@ -1,0 +1,32 @@
+nohup: ignoring input
+`torch_dtype` is deprecated! Use `dtype` instead!
+Using device: cuda:0
+
+====================================================================================================
+Loading Data
+====================================================================================================
+Loading preprocessed data from: /mnt/3fs/dots-pretrain/leshu/workspace/Texgemma/data/virtual_library_preprocessed.jsonl
+✓ Loaded 10024 molecules
+
+====================================================================================================
+Loading TXGemma-27B-Predict Model
+====================================================================================================
+
+Trying to load: google/txgemma-27b-chat
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files:   8%|▊         | 1/12 [00:43<07:57, 43.40s/it]Fetching 12 files:  17%|█▋        | 2/12 [00:44<03:05, 18.52s/it]Fetching 12 files:  25%|██▌       | 3/12 [00:52<02:05, 13.92s/it]Fetching 12 files:  33%|███▎      | 4/12 [00:53<01:09,  8.66s/it]Fetching 12 files:  75%|███████▌  | 9/12 [01:06<00:12,  4.24s/it]Fetching 12 files:  83%|████████▎ | 10/12 [01:08<00:07,  3.79s/it]Fetching 12 files:  92%|█████████▏| 11/12 [01:11<00:03,  3.60s/it]Fetching 12 files: 100%|██████████| 12/12 [01:11<00:00,  5.95s/it]
+Loading checkpoint shards:   0%|          | 0/12 [00:00<?, ?it/s]Loading checkpoint shards:   8%|▊         | 1/12 [00:00<00:05,  2.08it/s]Loading checkpoint shards:  17%|█▋        | 2/12 [00:01<00:05,  1.96it/s]Loading checkpoint shards:  25%|██▌       | 3/12 [00:01<00:04,  1.96it/s]Loading checkpoint shards:  33%|███▎      | 4/12 [00:02<00:04,  1.94it/s]Loading checkpoint shards:  42%|████▏     | 5/12 [00:02<00:03,  1.97it/s]Loading checkpoint shards:  50%|█████     | 6/12 [00:03<00:03,  1.98it/s]Loading checkpoint shards:  58%|█████▊    | 7/12 [00:03<00:02,  1.95it/s]Loading checkpoint shards:  67%|██████▋   | 8/12 [00:04<00:02,  1.90it/s]Loading checkpoint shards:  75%|███████▌  | 9/12 [00:04<00:01,  1.93it/s]Loading checkpoint shards:  83%|████████▎ | 10/12 [00:05<00:01,  1.92it/s]Loading checkpoint shards:  92%|█████████▏| 11/12 [00:05<00:00,  1.94it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:05<00:00,  2.10it/s]
+✓ Successfully loaded: google/txgemma-27b-chat
+
+====================================================================================================
+Starting Predictions
+====================================================================================================
+Model: google/txgemma-27b-chat
+Total molecules: 10024
+Estimated time: ~27.8 hours
+Start time: 2025-12-09 04:54:36
+
+====================================================================================================
+Starting Prediction for 10024 molecules
+====================================================================================================
+
+Predicting:   0%|          | 0/10024 [00:00<?, ?it/s]Predicting:   0%|          | 1/10024 [00:32<91:12:49, 32.76s/it]Predicting:   0%|          | 2/10024 [00:58<79:43:49, 28.64s/it]Predicting:   0%|          | 3/10024 [01:31<85:00:06, 30.54s/it]Predicting:   0%|          | 4/10024 [01:59<81:54:11, 29.43s/it]Predicting:   0%|          | 5/10024 [02:25<78:52:29, 28.34s/it]Predicting:   0%|          | 6/10024 [02:58<83:26:59, 29.99s/it]Predicting:   0%|          | 7/10024 [03:28<83:34:31, 30.04s/it]Predicting:   0%|          | 8/10024 [04:05<89:06:59, 32.03s/it]Predicting:   0%|          | 9/10024 [04:31<84:35:01, 30.40s/it]Predicting:   0%|          | 10/10024 [05:02<84:48:56, 30.49s/it]Predicting:   0%|          | 11/10024 [05:28<80:53:55, 29.09s/it]Predicting:   0%|          | 12/10024 [06:01<84:09:09, 30.26s/it]Predicting:   0%|          | 13/10024 [06:35<87:01:30, 31.29s/it]Predicting:   0%|          | 14/10024 [07:11<91:21:06, 32.85s/it]Predicting:   0%|          | 15/10024 [07:47<94:09:27, 33.87s/it]Predicting:   0%|          | 16/10024 [08:15<89:13:13, 32.09s/it]Predicting:   0%|          | 17/10024 [08:59<99:13:13, 35.69s/it]Predicting:   0%|          | 18/10024 [09:37<100:49:27, 36.27s/it]Predicting:   0%|          | 19/10024 [10:05<93:50:10, 33.76s/it] Predicting:   0%|          | 20/10024 [10:37<92:45:11, 33.38s/it]Predicting:   0%|          | 21/10024 [11:08<90:34:27, 32.60s/it]Predicting:   0%|          | 22/10024 [11:47<95:47:49, 34.48s/it]Predicting:   0%|          | 23/10024 [12:31<103:26:09, 37.23s/it]Predicting:   0%|          | 24/10024 [13:15<109:00:16, 39.24s/it]Predicting:   0%|          | 25/10024 [13:48<103:44:57, 37.35s/it]Predicting:   0%|          | 26/10024 [14:23<101:47:30, 36.65s/it]Predicting:   0%|          | 27/10024 [14:45<90:03:00, 32.43s/it] Predicting:   0%|          | 28/10024 [15:09<82:59:49, 29.89s/it]Predicting:   0%|          | 29/10024 [15:40<83:26:58, 30.06s/it]Predicting:   0%|          | 30/10024 [16:04<78:56:00, 28.43s/it]Predicting:   0%|          | 31/10024 [16:30<76:32:27, 27.57s/it]Predicting:   0%|          | 32/10024 [16:57<76:02:18, 27.40s/it]Predicting:   0%|          | 33/10024 [17:23<74:58:30, 27.02s/it]Predicting:   0%|          | 34/10024 [17:49<74:30:54, 26.85s/it]Predicting:   0%|          | 35/10024 [18:15<73:30:04, 26.49s/it]Predicting:   0%|          | 36/10024 [18:45<76:39:25, 27.63s/it]

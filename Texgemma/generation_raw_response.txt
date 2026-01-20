@@ -1,0 +1,54 @@
+## Ionizable Lipid Designs for mRNA Delivery (Predicted Score 9-10)
+
+**Design 1:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C
+
+**Description:** Tertiary amine with two C16 alkyl tails, one branched, connected via ester linkages to a glycerol backbone.
+**Expected Score:** 9 
+
+**Design 2:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2C)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C
+
+**Description:** Tertiary amine with one C18 alkyl tail and one C16 branched alkyl tail, connected via ester linkages to a glycerol backbone.
+**Expected Score:** 9
+
+**Design 3:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2C(O)C3C=CC=CC=3)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C
+
+**Description:** Tertiary amine with two C16 alkyl tails, one branched and one with a terminal hydroxyl group, connected via ester linkages to a glycerol backbone.
+**Expected Score:** 9
+
+**Design 4:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2C(O)C3C=CC=CC=3)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C
+
+**Description:** Tertiary amine with two C18 alkyl tails, both branched, connected via ester linkages to a glycerol backbone.
+**Expected Score:** 10
+
+**Design 5:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2C(O)C3C=CC=CC=3C)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C
+
+**Description:** Tertiary amine with two C16 alkyl tails, one with a terminal hydroxyl group and one branched, connected via ester linkages to a glycerol backbone.
+**Expected Score:** 9
+
+**Design 6:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@@H]1(N)CCCC[C@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2C(O)C3C=CC=CC=3C)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@@H]1(N)CCCC[C@H]1N(C)C
+
+**Description:** Tertiary amine with one C18 alkyl tail and one C16 alkyl tail with a terminal hydroxyl group, connected via ester linkages to a glycerol backbone.
+**Expected Score:** 9
+
+**Design 7:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2C(O)C3C=CC=CC=3C(O)C4C=CC=CC=4)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@H]1(N)CCCC[C@@H]1N(C)C
+
+**Description:** Tertiary amine with two C18 alkyl tails, both with terminal hydroxyl groups, connected via ester linkages to a glycerol backbone.
+**Expected Score:** 9
+
+**Design 8:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@@H]1(N)CCCC[C@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2C(O)C3C=CC=CC=3C(O)C4C=CC=CC=4C(O)C5C=CC=CC=5)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@@H]1(N)CCCC[C@H]1N(C)C
+
+**Description:** Tertiary amine with three C16 alkyl tails, one branched, connected via ester linkages to a glycerol backbone.
+**Expected Score:** 8
+
+**Design 9:**
+SMILES: CC(C)([O-])C([O-])=O.ClC1C=CC=C(C(O)C2C=CC=CC=2)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@@H]1(N)CCCC[C@H]1N(C)C.ClC1C=CC=C(C(O)C2C=CC=CC=2C(O)C3C=CC=CC=3C(O)C4C=CC=CC=4C(O)C5C=CC=CC=5C(O)C6C=CC=CC=6)C=1.C1(C)C=CC(S(O)(=O)=O)=CC=1.[C@@H]1(N)CCCC[C@H]1N(C)C
+
+**Description:** Tertiary amine with two C16 alkyl tails and one C18 alkyl tail, all branched, connected via ester linkages to a glycerol backbone.

@@ -1,0 +1,79 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+================================================================================
+加载TXGemma-27B模型
+================================================================================
+Loading checkpoint shards:   0%|          | 0/12 [00:00<?, ?it/s]Loading checkpoint shards:   8%|▊         | 1/12 [00:00<00:07,  1.41it/s]Loading checkpoint shards:  17%|█▋        | 2/12 [00:01<00:07,  1.39it/s]Loading checkpoint shards:  25%|██▌       | 3/12 [00:02<00:06,  1.38it/s]Loading checkpoint shards:  33%|███▎      | 4/12 [00:02<00:05,  1.50it/s]Loading checkpoint shards:  42%|████▏     | 5/12 [00:03<00:04,  1.42it/s]Loading checkpoint shards:  50%|█████     | 6/12 [00:04<00:03,  1.50it/s]Loading checkpoint shards:  58%|█████▊    | 7/12 [00:04<00:03,  1.48it/s]Loading checkpoint shards:  67%|██████▋   | 8/12 [00:05<00:02,  1.60it/s]Loading checkpoint shards:  75%|███████▌  | 9/12 [00:06<00:01,  1.53it/s]Loading checkpoint shards:  83%|████████▎ | 10/12 [00:06<00:01,  1.41it/s]Loading checkpoint shards:  92%|█████████▏| 11/12 [00:07<00:00,  1.55it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:07<00:00,  2.07it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:07<00:00,  1.60it/s]
+✓ 模型加载完成
+
+读取了 10 个AI生成的lipid分子
+
+[1/10] 生成理由 - ID=1, 预期分数=9
+  SMILES: CCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+  ✓ 生成理由: 3068 字符
+
+[2/10] 生成理由 - ID=2, 预期分数=9
+  SMILES: CCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)NC1=CNN=C1...
+  ✓ 生成理由: 2645 字符
+
+[3/10] 生成理由 - ID=3, 预期分数=9
+  SMILES: CCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+  ✓ 生成理由: 2870 字符
+
+  💾 已保存进度: 3/10
+
+[4/10] 生成理由 - ID=4, 预期分数=9
+  SMILES: CCCCC(C)CCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+  ✓ 生成理由: 3057 字符
+
+[5/10] 生成理由 - ID=6, 预期分数=9
+  SMILES: CCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)N(C)C1=CNN=C1...
+  ✓ 生成理由: 3521 字符
+
+[6/10] 生成理由 - ID=7, 预期分数=8
+  SMILES: CCCCCCCCCC(=O)OCCCCCC(NC1=CNN=C1)C(=O)NCCCCCCCCCCC...
+  ✓ 生成理由: 3373 字符
+
+  💾 已保存进度: 6/10
+
+[7/10] 生成理由 - ID=8, 预期分数=8
+  SMILES: CC(C)CCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCC)NC1=CNN=C1...
+  ✓ 生成理由: 3526 字符
+
+[8/10] 生成理由 - ID=9, 预期分数=8
+  SMILES: CCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCCCCCCC)NC1=CNN(C)C=1...
+  ✓ 生成理由: 4025 字符
+
+[9/10] 生成理由 - ID=10, 预期分数=9
+  SMILES: CCCCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1...
+  ✓ 生成理由: 2857 字符
+
+  💾 已保存进度: 9/10
+
+[10/10] 生成理由 - ID=11, 预期分数=10
+  SMILES: CCCCCCCCNC(=O)C(CCCCCOC(=O)CCC(C)CCCCC)NCCN1CCCC1...
+  ✓ 生成理由: 3233 字符
+
+================================================================================
+✓ 完成！所有理由已生成
+================================================================================
+
+结果已保存到: result_AI_predicted.json
+
+理由统计:
+  总字符数: 32175
+  平均每个: 3218 字符
+
+================================================================================
+示例 - ID 1:
+================================================================================
+SMILES: CCCCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCCC)NC1=CNN=C1
+Score: 9/10
+
+Reason:
+While the provided SMILES string represents a molecule with long alkyl chains and a potential ionizable group, it's important to note that **this molecule is unlikely to be a successful mRNA delivery vehicle as described.** Here's why:
+
+**Structural Features and Limitations:**
+
+* **Long Alkyl Chains:** The molecule consists of two long alkyl chains (CCCCCCCCCCCCCC) attached to a central core. These chains are highly hydrophobic and would likely aggregate in aqueous solutions, hindering nanoparti...
+
+完成!

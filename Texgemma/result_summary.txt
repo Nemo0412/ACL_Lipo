@@ -1,0 +1,77 @@
+====================================================================================================
+TXGemma Virtual Library Prediction Summary
+====================================================================================================
+
+Model: google/txgemma-27b-predict
+Total molecules: 10024
+Start time: 2025-12-08 17:39:20
+End time: 2025-12-08 18:08:26
+Total time: 0.49 hours
+Average: 0.17 seconds/molecule
+
+Score Distribution:
+  Score  5: 10020 molecules (100.0%)
+  Score  2:    4 molecules (  0.0%)
+
+
+Top 10 Molecules:
+
+#1 - ID: 1, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCC)=O)=O)CCC(OCCCCOC(CCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#2 - ID: 2, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCC)=O)=O)CCC(OCCCCOC(CCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#3 - ID: 3, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#4 - ID: 4, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#5 - ID: 5, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#6 - ID: 6, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#7 - ID: 7, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#8 - ID: 8, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCCCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#9 - ID: 9, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCCCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCCCCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...
+
+#10 - ID: 10, Score: 5/10
+  SMILES: O=C(OC)CN(CCC(OCCCCOC(CCCCCCCCCCCCCC)=O)=O)CCC(OCCCCOC(CCCCCCCCCCCCCC)=O)=O
+  Reason: [WARNING: No clear score found in response, defaulting to 5]
+
+...

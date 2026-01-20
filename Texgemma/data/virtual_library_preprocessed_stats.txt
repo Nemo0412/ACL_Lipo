@@ -1,0 +1,47 @@
+================================================================================
+Virtual Library Statistics
+================================================================================
+
+Total molecules: 10024
+
+Amino acid distribution:
+amino_acid
+KC    240
+CK    240
+KV    240
+VK    240
+K     198
+     ... 
+CC    104
+L     104
+LG    104
+GS    104
+KK    102
+Name: count, Length: 84, dtype: int64
+
+Protection group distribution:
+protection_group
+CH3CO        4856
+CH3CH2CO     4856
+C6H5CH2CO     312
+Name: count, dtype: int64
+
+Linker length distribution:
+linker_length
+0     116
+4    4956
+6    4952
+Name: count, dtype: int64
+
+Ester bonds (OCOO) distribution:
+ester_bonds_OCOO
+0    5070
+1    4954
+Name: count, dtype: int64
+
+Tail count distribution:
+tail_count
+2    6604
+4    3272
+6     148
+Name: count, dtype: int64
