@@ -129,7 +129,7 @@ Finetuned LoRA adapters are available on HuggingFace:
 | Model | HuggingFace | Train Loss | Eval Loss |
 |-------|------------|-----------|-----------|
 | TxGemma-9B-Chat | [Nemo0412/txgemma-9b-lipo](https://huggingface.co/Nemo0412/txgemma-9b-lipo) | 0.21 | 0.261 |
-| Qwen3-8B | Coming soon | — | — |
+| Qwen3-8B | [Nemo0412/qwen3-8b-lipo](https://huggingface.co/Nemo0412/qwen3-8b-lipo) | 0.367 | — |
 
 Load a finetuned adapter:
 ```python
