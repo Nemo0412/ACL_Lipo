@@ -39,10 +39,10 @@ LipoAgent/
 │       ├── finetune_sft.py     # LoRA SFT finetuning
 │       └── upload_to_hub.py    # Merge LoRA + push to HuggingFace Hub
 │
-├── qwen/                       # Qwen2.5-32B-Instruct agents
+├── qwen/                       # Qwen3-8B agents
 │   ├── predict_agent.py        # Predict Agent: efficiency score prediction
 │   ├── verify_agent.py         # Verify Agent: molecular descriptor-based verification
-│   └── finetune/               # Finetuning scripts for Qwen2.5
+│   └── finetune/               # Finetuning scripts for Qwen3-8B
 │       ├── finetune_sft.py     # LoRA SFT finetuning
 │       └── upload_to_hub.py    # Merge LoRA + push to HuggingFace Hub
 │
@@ -87,7 +87,7 @@ Output: `data/txgemma_verify_results.json`
 
 ### 3. Qwen Agents
 
-**Predict Agent** — Qwen2.5-32B-Instruct efficiency prediction:
+**Predict Agent** — Qwen3-8B efficiency prediction:
 ```bash
 python qwen/predict_agent.py
 ```
@@ -101,7 +101,7 @@ Output: `data/qwen_verify_results.json`
 
 ### 4. Finetuning
 
-Prepare data, then run finetuning. See `txgemma/finetune/README.md` and `qwen/finetune/README.md` for full instructions.
+Prepare data, then run finetuning.
 
 ```bash
 # Step 1: build training data
@@ -114,12 +114,12 @@ python txgemma/finetune/finetune_sft.py \
     --val_file   data/finetune/val.jsonl   \
     --output_dir checkpoints/txgemma-9b-lipo
 
-# Step 3: finetune Qwen2.5-32B
+# Step 3: finetune Qwen3-8B
 python qwen/finetune/finetune_sft.py \
-    --model_path Qwen/Qwen2.5-32B-Instruct \
+    --model_path Qwen/Qwen3-8B \
     --train_file data/finetune/train.jsonl \
     --val_file   data/finetune/val.jsonl   \
-    --output_dir checkpoints/qwen-32b-lipo
+    --output_dir checkpoints/qwen3-8b-lipo
 ```
 
 #### Pretrained Adapters
@@ -129,7 +129,7 @@ Finetuned LoRA adapters are available on HuggingFace:
 | Model | HuggingFace | Train Loss | Eval Loss |
 |-------|------------|-----------|-----------|
 | TxGemma-9B-Chat | [Nemo0412/txgemma-9b-lipo](https://huggingface.co/Nemo0412/txgemma-9b-lipo) | 0.21 | 0.261 |
-| Qwen2.5-32B-Instruct | Coming soon | — | — |
+| Qwen3-8B | Coming soon | — | — |
 
 Load a finetuned adapter:
 ```python
