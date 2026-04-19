@@ -1,8 +1,11 @@
-# LipoAgent: Multi-Agent LLM Framework for LNP mRNA Transfection Efficiency Prediction
+# LipoAgent: Coordinating Fine-Tuned LLM Agents for Safer Lipid Design
 
-Code for ACL submission. This repository implements a multi-agent framework
-using **TxGemma** and **Qwen** for predicting and verifying lipid nanoparticle
-(LNP) mRNA transfection efficiency.
+*ACL 2026*
+
+This repository contains the official implementation of **LipoAgent**, a
+multi-agent framework that coordinates fine-tuned **TxGemma** and **Qwen**
+agents to predict and verify lipid nanoparticle (LNP) mRNA transfection
+efficiency for safer lipid design.
 
 ## Repository Structure
 
