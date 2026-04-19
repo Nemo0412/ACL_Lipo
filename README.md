@@ -11,13 +11,13 @@ nanoparticle (LNP) mRNA transfection efficiency for safer lipid design.
 
 **Figure 1** — Overview of LipoAgent, a safety-aware multi-agent LLM framework for lipid discovery.
 
-![Figure 1](figure1.png)
+![Figure 1](figures/figure1.png)
 
 **Figure 2** — Overview of the LipoAgent framework.
 - **(a) Fine-tuning and prompting pipeline** for constructing the predictor agent from a base LLM.
 - **(b) Multi-agent collaboration in LipoAgent**, where agents coordinate with human feedback to iteratively filter and refine candidates toward high-efficiency lipids.
 
-![Figure 2](figure2.png)
+![Figure 2](figures/figure2.png)
 
 ## Repository Structure
 
