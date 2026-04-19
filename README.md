@@ -122,6 +122,25 @@ python qwen/finetune/finetune_sft.py \
     --output_dir checkpoints/qwen-32b-lipo
 ```
 
+#### Pretrained Adapters
+
+Finetuned LoRA adapters are available on HuggingFace:
+
+| Model | HuggingFace | Train Loss | Eval Loss |
+|-------|------------|-----------|-----------|
+| TxGemma-9B-Chat | [Nemo0412/txgemma-9b-lipo](https://huggingface.co/Nemo0412/txgemma-9b-lipo) | 0.21 | 0.261 |
+| Qwen2.5-32B-Instruct | Coming soon | — | — |
+
+Load a finetuned adapter:
+```python
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
+import torch
+
+base = AutoModelForCausalLM.from_pretrained("google/txgemma-9b-chat", torch_dtype=torch.bfloat16, device_map="auto")
+model = PeftModel.from_pretrained(base, "Nemo0412/txgemma-9b-lipo")
+```
+
 ### 5. Baselines
 
 **TxGemma-9B (zero-shot):**
