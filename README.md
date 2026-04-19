@@ -1,6 +1,6 @@
 # LipoAgent: Coordinating Fine-Tuned LLM Agents for Safer Lipid Design
 
-*ACL 2026*
+🔥 Our work has been accepted to ACL 2026!
 
 This repository contains the official implementation of **LipoAgent**, a
 safety-aware multi-agent LLM framework for lipid discovery that coordinates
