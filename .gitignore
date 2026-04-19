@@ -1,0 +1,50 @@
+# Checkpoint files and directories
+*ckpt*
+checkpoint*
+*.ckpt
+checkpoints/
+
+# SLURM job scripts (server-specific, contain credentials)
+*.sbatch
+monitor_job.sh
+
+# Generated training data (large, reproducible via build_dataset.py)
+data/finetune/qwen_labels.json
+data/finetune/txgemma_labels.json
+data/finetune/train.jsonl
+data/finetune/val.jsonl
+
+# Log files
+*.log
+*.pid
+*.txt.bak
+
+# Virtual environments
+*_venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Large model files
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# Compiled files
+*.so
+*.whl
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
