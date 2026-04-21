@@ -172,6 +172,7 @@ def main():
         ],
     )
     model = get_peft_model(model, lora_cfg)
+    model.enable_input_require_grads()   # required when gradient_checkpointing=True with LoRA
     if is_main:
         model.print_trainable_parameters()
 
@@ -220,6 +221,7 @@ def main():
         weight_decay=args.weight_decay,
         bf16=True,
         gradient_checkpointing=True,
+        gradient_checkpointing_kwargs={"use_reentrant": False},
         logging_steps=args.logging_steps,
         eval_strategy="steps",
         eval_steps=args.eval_steps,

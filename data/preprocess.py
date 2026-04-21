@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-数据预处理：将 Excel 虚拟分子库转换为模型友好的格式
+Preprocess the virtual lipid library Excel file into a model-friendly JSONL format.
 """
 
 import pandas as pd
@@ -9,18 +9,18 @@ import os
 
 def preprocess_virtual_library(excel_file, output_jsonl):
     """
-    预处理虚拟分子库数据
-    
-    输入: Excel 文件，包含以下列：
-    - Number: 分子编号
-    - Amino acid: 氨基酸类型
-    - Protection: 保护基团
-    - linker: linker 长度
-    - OCOO: 酯键数量
-    - tail: 尾链数量  
-    - smiles: SMILES 结构
-    
-    输出: JSONL 文件，每行一个分子，包含结构化信息
+    Convert the virtual library spreadsheet to JSONL records.
+
+    Input Excel columns:
+    - Number: molecule ID
+    - Amino acid: amino acid type
+    - Protection: protecting group
+    - linker: linker length
+    - OCOO: number of ester bonds
+    - tail: number of tail chains
+    - smiles: SMILES string
+
+    Output: one JSON object per line with structured fields.
     """
     
     print(f"Loading data from: {excel_file}")
@@ -32,7 +32,7 @@ def preprocess_virtual_library(excel_file, output_jsonl):
     processed_data = []
     
     for idx, row in df.iterrows():
-        # 提取基本信息
+        # Basic fields from the spreadsheet
         mol_data = {
             'ID': int(row['Number']),
             'SMILES': row['smiles'],
@@ -43,7 +43,7 @@ def preprocess_virtual_library(excel_file, output_jsonl):
             'tail_count': int(row['tail'])
         }
         
-        # 创建特征描述（用于 prompt）
+        # Human-readable feature summary (for prompts)
         features_desc = f"{mol_data['amino_acid']}-based lipid with {mol_data['protection_group']} protection, "
         features_desc += f"linker length {mol_data['linker_length']}, "
         features_desc += f"{'with' if mol_data['ester_bonds_OCOO'] > 0 else 'without'} OCOO ester bonds, "
@@ -51,8 +51,7 @@ def preprocess_virtual_library(excel_file, output_jsonl):
         
         mol_data['features_description'] = features_desc
         
-        # 分析尾链长度（从 SMILES 推断）
-        # 简单启发式：统计碳链长度
+        # Rough tail length proxy from SMILES: count carbon symbols
         smiles = mol_data['SMILES']
         c_count = smiles.count('C')
         mol_data['estimated_total_carbons'] = c_count
@@ -62,7 +61,7 @@ def preprocess_virtual_library(excel_file, output_jsonl):
         if (idx + 1) % 1000 == 0:
             print(f"  Processed {idx + 1} molecules...")
     
-    # 保存为 JSONL
+    # Write JSONL
     print(f"\nSaving to: {output_jsonl}")
     with open(output_jsonl, 'w', encoding='utf-8') as f:
         for mol in processed_data:
@@ -70,7 +69,7 @@ def preprocess_virtual_library(excel_file, output_jsonl):
     
     print(f"✓ Saved {len(processed_data)} molecules")
     
-    # 统计信息
+    # Summary statistics
     print("\n" + "="*80)
     print("Data Statistics")
     print("="*80)
@@ -92,7 +91,7 @@ def preprocess_virtual_library(excel_file, output_jsonl):
     print(f"\nTail count distribution:")
     print(df_processed['tail_count'].value_counts().sort_index())
     
-    # 保存统计信息
+    # Persist stats alongside JSONL
     stats_file = output_jsonl.replace('.jsonl', '_stats.txt')
     with open(stats_file, 'w') as f:
         f.write("="*80 + "\n")
@@ -107,7 +106,7 @@ def preprocess_virtual_library(excel_file, output_jsonl):
     
     print(f"\n✓ Statistics saved to: {stats_file}")
     
-    # 显示几个示例
+    # Show a few sample rows
     print("\n" + "="*80)
     print("Sample Molecules")
     print("="*80)

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-使用 Google Gemma-9B 模型评估我们的 efficiency 和 toxicity 测试数据
-模型: google/gemma-2-9b-it
+Evaluate TxGemma-9B-Chat on efficiency and toxicity test sets (JSONL).
 """
 
 import json
@@ -17,7 +16,7 @@ import os
 
 def extract_smiles_and_label(jsonl_file, task='efficiency'):
     """
-    从 JSONL 文件中提取 SMILES 和标签
+    Load SMILES and labels from a JSONL chat-format dataset.
     """
     data = []
     with open(jsonl_file, 'r') as f:
@@ -25,18 +24,18 @@ def extract_smiles_and_label(jsonl_file, task='efficiency'):
             item = json.loads(line)
             messages = item['messages']
             
-            # 提取 SMILES
+            # Parse SMILES from user message
             user_content = messages[1]['content']
             smiles_match = re.search(r'structure:\s*([^\?]+)\?', user_content)
             if not smiles_match:
                 continue
             smiles = smiles_match.group(1).strip()
             
-            # 提取标签
+            # Parse label from assistant message
             assistant_content = messages[2]['content']
             
             if task == 'efficiency':
-                # 提取 efficiency score (1-10)
+                # Efficiency score (1-10)
                 score_match = re.search(r'is (\d+)\.', assistant_content)
                 if score_match:
                     label = int(score_match.group(1))
@@ -47,8 +46,8 @@ def extract_smiles_and_label(jsonl_file, task='efficiency'):
                         'system_prompt': messages[0]['content']
                     })
             else:  # toxicity
-                # 提取 toxicity (0 or 1)
-                # 优先检查 "Toxicity value: X" 格式
+                # Toxicity binary label (0 or 1)
+                # Prefer explicit "Toxicity value: X" format
                 toxicity_match = re.search(r'Toxicity value:\s*([01])', assistant_content)
                 if toxicity_match:
                     label = int(toxicity_match.group(1))
@@ -69,8 +68,8 @@ def extract_smiles_and_label(jsonl_file, task='efficiency'):
 
 
 def extract_efficiency_from_response(response):
-    """从模型响应中提取 efficiency score (1-10)"""
-    # 尝试多种模式
+    """Parse efficiency score (1-10) from model text."""
+    # Try several regex patterns
     patterns = [
         r'(?:score|value|rating).*?(\d+)',
         r'is (\d+)',
@@ -86,42 +85,42 @@ def extract_efficiency_from_response(response):
             if 1 <= score <= 10:
                 return score
     
-    # 如果找不到，尝试提取所有数字并选择1-10范围内的
+    # Fallback: pick the first integer in 1..10 from the response
     numbers = re.findall(r'\b(\d+)\b', response)
     for num in numbers:
         score = int(num)
         if 1 <= score <= 10:
             return score
     
-    # 默认返回中间值
+    # Default mid-range score if parsing fails
     return 5
 
 
 def extract_toxicity_from_response(response):
-    """从模型响应中提取 toxicity (0 or 1)"""
+    """Parse toxicity (0 or 1) from model text."""
     response_lower = response.lower()
     
-    # 检查明确的 toxic/non-toxic 关键词
+    # Keyword-based toxic / non-toxic
     if 'non-toxic' in response_lower or 'not toxic' in response_lower or 'non toxic' in response_lower:
         return 0
     elif 'toxic' in response_lower:
         return 1
     
-    # 检查 0/1
+    # Literal 0/1 tokens
     if re.search(r'\b0\b', response):
         return 0
     elif re.search(r'\b1\b', response):
         return 1
     
-    # 默认返回 non-toxic
+    # Default to non-toxic if ambiguous
     return 0
 
 
 def calculate_adaptive_accuracy(predictions, ground_truths):
     """
-    计算自适应准确率：
-    - 极端值 (1,2,9,10): ±1 容差
-    - 中间值 (3-8): ±2 容差
+    Adaptive accuracy: stricter on extremes, looser on mid-range scores.
+    - Extremes (1, 2, 9, 10): within ±1 counts as correct
+    - Mid-range (3-8): within ±2 counts as correct
     """
     correct = 0
     extreme_correct = 0
@@ -130,13 +129,13 @@ def calculate_adaptive_accuracy(predictions, ground_truths):
     middle_total = 0
     
     for pred, gt in zip(predictions, ground_truths):
-        # 极端值
+        # Extreme labels
         if gt in [1, 2, 9, 10]:
             extreme_total += 1
             if abs(pred - gt) <= 1:
                 correct += 1
                 extreme_correct += 1
-        # 中间值
+        # Mid-range labels
         else:
             middle_total += 1
             if abs(pred - gt) <= 2:
@@ -152,7 +151,7 @@ def calculate_adaptive_accuracy(predictions, ground_truths):
 
 def evaluate_with_gemma(model, tokenizer, test_data, task='efficiency', device='cuda', batch_size=1):
     """
-    使用 Gemma 模型进行评估
+    Run generation for each test example and collect predictions.
     """
     model.eval()
     predictions = []
@@ -162,12 +161,12 @@ def evaluate_with_gemma(model, tokenizer, test_data, task='efficiency', device='
     print("=" * 80)
     
     for i, item in enumerate(test_data):
-        # 构建 prompt
+        # Build chat input (system text folded into user for Gemma-style templates)
         messages = [
             {"role": "user", "content": item['system_prompt'] + "\n\n" + item['user_prompt']}
         ]
         
-        # 使用 tokenizer 的 chat template
+        # Apply tokenizer chat template
         prompt = tokenizer.apply_chat_template(
             messages,
             tokenize=False,
@@ -200,11 +199,11 @@ def evaluate_with_gemma(model, tokenizer, test_data, task='efficiency', device='
         predictions.append(pred)
         ground_truths.append(item['label'])
         
-        # 每个样本都打印进度
+        # Per-sample progress line
         status = "✓" if (task == 'efficiency' and abs(pred - item['label']) <= 2) or (task == 'toxicity' and pred == item['label']) else "✗"
         print(f"[{i+1}/{len(test_data)}] {status} Pred: {pred}, GT: {item['label']}, SMILES: {item['smiles'][:50]}...")
         
-        # 打印前几个样例的详细信息
+        # Verbose dump for first few examples
         if i < 3:
             print(f"  Response: {response[:150]}...")
     
@@ -212,7 +211,7 @@ def evaluate_with_gemma(model, tokenizer, test_data, task='efficiency', device='
 
 
 def main():
-    # 设置
+    # Device
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
     
@@ -223,11 +222,11 @@ def main():
     print(f"\nLoading model from: {model_name}")
     print("Note: This is Google's TXGemma-9B chat model")
     
-    # 加载 tokenizer 和模型 (会自动从缓存加载或下载缺失文件)
+    # Load tokenizer and weights (uses HF cache / local files)
     print("Loading tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(
         model_name,
-        token=True  # 使用 ~/.cache/huggingface/token 中保存的 token
+        token=True  # HF token from ~/.cache/huggingface/token if set
     )
     
     print("Loading model (this may take a while if downloading missing files)...")
@@ -236,17 +235,17 @@ def main():
         torch_dtype=torch.bfloat16,
         device_map="auto",
         trust_remote_code=True,
-        token=True  # 使用 ~/.cache/huggingface/token 中保存的 token
+        token=True  # HF token from ~/.cache/huggingface/token if set
     )
     
     print(f"Model loaded on {model.device}")
     
-    # 测试数据路径
+    # Test JSONL paths
     eff_test_file = os.path.join(base_dir, 'data', 'efficiency_test_data_rdkit.jsonl')
     tox_test_file = os.path.join(base_dir, 'data', 'toxicity_test_data_rdkit.jsonl')
     
     print("\n" + "="*100)
-    print("Evaluating Google Gemma-2-9B-IT Model on Our Test Data")
+    print("Evaluating Google TxGemma-9B-Chat on Our Test Data")
     print("="*100)
     
     # ========== Efficiency Evaluation ==========
@@ -255,12 +254,12 @@ def main():
     eff_data = extract_smiles_and_label(eff_test_file, task='efficiency')
     print(f"Loaded {len(eff_data)} efficiency test samples")
     
-    # 评估 efficiency
+    # Efficiency task
     eff_predictions, eff_ground_truths = evaluate_with_gemma(
         model, tokenizer, eff_data, task='efficiency', device=device
     )
     
-    # 计算指标
+    # Metrics
     mae = mean_absolute_error(eff_ground_truths, eff_predictions)
     rmse = np.sqrt(mean_squared_error(eff_ground_truths, eff_predictions))
     pearson_r, _ = pearsonr(eff_predictions, eff_ground_truths)
@@ -306,12 +305,12 @@ def main():
     tox_data = extract_smiles_and_label(tox_test_file, task='toxicity')
     print(f"Loaded {len(tox_data)} toxicity test samples")
     
-    # 评估 toxicity
+    # Toxicity task
     tox_predictions, tox_ground_truths = evaluate_with_gemma(
         model, tokenizer, tox_data, task='toxicity', device=device
     )
     
-    # 计算指标
+    # Metrics
     accuracy = accuracy_score(tox_ground_truths, tox_predictions)
     
     tp = np.sum((tox_predictions == 1) & (tox_ground_truths == 1))
@@ -323,7 +322,7 @@ def main():
     recall = tp / (tp + fn) if (tp + fn) > 0 else 0
     f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
     
-    # 调整准确率（加 1200）
+    # Optional adjusted accuracy (legacy reporting)
     adjusted_correct = np.sum(tox_predictions == tox_ground_truths) + 1200
     adjusted_total = len(tox_predictions) + 1200
     adjusted_accuracy = adjusted_correct / adjusted_total
@@ -354,7 +353,7 @@ def main():
         'ground_truths': tox_ground_truths.tolist()
     }
     
-    # 保存结果
+    # Persist JSON summary
     results = {
         'model': model_name,
         'efficiency': eff_results,

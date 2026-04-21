@@ -55,9 +55,21 @@ def apply_chat_template_and_tokenize(examples, tokenizer, max_length: int):
     all_labels    = []
 
     for messages in examples["messages"]:
+        # Gemma/TxGemma chat template does not support a 'system' role.
+        # Merge any leading system message into the first user turn.
+        msgs = list(messages)
+        if msgs and msgs[0]["role"] == "system":
+            sys_content = msgs[0]["content"]
+            if len(msgs) > 1 and msgs[1]["role"] == "user":
+                msgs[1] = {
+                    "role": "user",
+                    "content": sys_content + "\n\n" + msgs[1]["content"],
+                }
+            msgs = msgs[1:]  # drop system turn
+
         # Full conversation → token ids
         full_text = tokenizer.apply_chat_template(
-            messages,
+            msgs,
             tokenize=False,
             add_generation_prompt=False,
         )
@@ -69,10 +81,10 @@ def apply_chat_template_and_tokenize(examples, tokenizer, max_length: int):
             return_tensors=None,
         )["input_ids"]
 
-        # Build label mask: -100 for system+user, real ids for assistant
+        # Build label mask: -100 for user, real ids for assistant
         # Strategy: tokenize the prefix (all turns except last assistant),
         # then mask everything up to len(prefix).
-        prefix_messages = messages[:-1]          # system + user
+        prefix_messages = msgs[:-1]          # user only (system already merged)
         prefix_text = tokenizer.apply_chat_template(
             prefix_messages,
             tokenize=False,
@@ -182,6 +194,7 @@ def main():
         ],
     )
     model = get_peft_model(model, lora_cfg)
+    model.enable_input_require_grads()   # required when gradient_checkpointing=True with LoRA
     if is_main:
         model.print_trainable_parameters()
 
@@ -230,6 +243,7 @@ def main():
         weight_decay=args.weight_decay,
         bf16=True,
         gradient_checkpointing=True,
+        gradient_checkpointing_kwargs={"use_reentrant": False},
         logging_steps=args.logging_steps,
         eval_strategy="steps",
         eval_steps=args.eval_steps,

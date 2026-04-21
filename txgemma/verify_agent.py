@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-使用 Google TXGemma-27B-Chat 模型预测虚拟分子库的 mRNA 转染效率
-增量保存版本 - 每预测完成就保存结果
+TxGemma-27B-Chat verify pass: two-stage scoring with incremental JSON saves.
 """
 
 import json
@@ -13,7 +12,7 @@ import os
 from datetime import datetime
 
 def load_preprocessed_data(jsonl_file):
-    """加载预处理后的 JSONL 数据"""
+    """Load preprocessed JSONL records."""
     print(f"Loading preprocessed data from: {jsonl_file}")
     
     data = []
@@ -26,15 +25,15 @@ def load_preprocessed_data(jsonl_file):
 
 
 def create_prediction_prompt(mol_data, need_detailed_reason=False):
-    """创建预测 prompt - 使用对话格式
-    
+    """Build prompt for fast score-only pass or detailed rationale pass.
+
     Args:
-        mol_data: 分子数据
-        need_detailed_reason: 是否需要详细理由（True=详细，False=仅分数）
+        mol_data: molecule dict from preprocess.
+        need_detailed_reason: if True, ask for long-form rationale.
     """
     
     if need_detailed_reason:
-        # 详细版本：用于分数≥7或=1的分子
+        # Long prompt for high/low scorers
         conversation = f"""<start_of_turn>user
 You are an expert in lipid nanoparticles and mRNA delivery. Please predict the mRNA transfection efficiency for the following lipid molecule.
 
@@ -62,7 +61,7 @@ Reason: [Your detailed analysis of the molecular structure and its impact on tra
 <start_of_turn>model
 """
     else:
-        # 简短版本：仅获取分数（快速预测）
+        # Short prompt: score only (fast path)
         conversation = f"""<start_of_turn>user
 You are an expert in lipid nanoparticles and mRNA delivery. Predict the transfection efficiency score (1-10) for this molecule:
 
@@ -78,14 +77,14 @@ Respond ONLY with: Efficiency Score: [number]<end_of_turn>
 
 
 def extract_score_and_reason(response):
-    """从模型响应中提取效率分数和理由"""
+    """Parse score and rationale from free-form model text."""
     score = None
     reason = ""
     
-    # 模型输出格式: "## Efficiency Score: 3\n\n## Reason:\n..."
-    # 提取分数 - 包括 markdown 格式
+    # Typical output: "## Efficiency Score: 3\n\n## Reason:\n..."
+    # Score regexes (markdown-friendly)
     score_patterns = [
-        r'##\s*[Ee]fficiency\s+[Ss]core\s*[:：]\s*(\d+)',  # ## Efficiency Score: 3
+        r'##\s*[Ee]fficiency\s+[Ss]core\s*[:：]\s*(\d+)',  # markdown heading style
         r'[Ee]fficiency\s+[Ss]core\s*[:：]\s*(\d+)',
         r'##\s*[Ss]core\s*[:：]\s*(\d+)',
         r'[Ss]core\s*[:：]\s*(\d+)',
@@ -100,15 +99,15 @@ def extract_score_and_reason(response):
             if 1 <= score <= 10:
                 break
     
-    # 如果没找到，尝试找第一个1-10的数字
+    # Fallback: first 1..10 token
     if score is None:
         numbers = re.findall(r'\b([1-9]|10)\b', response)
         if numbers:
             score = int(numbers[0])
     
-    # 提取理由 - 支持 markdown 格式
+    # Rationale regexes (markdown-friendly)
     reason_patterns = [
-        r'##\s*[Rr]eason\s*[:：]?\s*\n+(.+)',  # ## Reason: (markdown)
+        r'##\s*[Rr]eason\s*[:：]?\s*\n+(.+)',  # markdown heading style
         r'[Rr]eason\s*[:：]\s*(.+)',
         r'##\s*[Aa]nalysis\s*[:：]?\s*\n+(.+)',
         r'[Rr]ationale\s*[:：]\s*(.+)',
@@ -120,9 +119,7 @@ def extract_score_and_reason(response):
             reason = match.group(1).strip()
             break
     
-    # 如果没有找到理由，使用完整响应（去除分数标题）
-    if not reason or len(reason) < 30:
-        # 移除分数行，保留其余内容
+    # If rationale missing/short, strip score heading lines from full text
         lines = response.split('\n')
         reason_lines = []
         skip_next = False
@@ -136,12 +133,12 @@ def extract_score_and_reason(response):
             reason_lines.append(line)
         reason = '\n'.join(reason_lines).strip()
     
-    # 默认分数
+    # Default score if parsing fails
     if score is None:
         score = 5
         reason = f"[WARNING: No score found, using 5]\n\n{response[:500]}"
     
-    # 如果理由还是太短，使用完整响应
+    # Last resort: keep entire response as rationale
     if len(reason) < 20:
         reason = response.strip()
     
@@ -149,8 +146,7 @@ def extract_score_and_reason(response):
 
 
 def save_results_incremental(results, output_file):
-    """增量保存结果"""
-    # 按照 efficiency_score 从大到小排序
+    """Write current results to disk (sorted by score)."""
     results_sorted = sorted(results, key=lambda x: x['efficiency_score'], reverse=True)
     
     with open(output_file, 'w', encoding='utf-8') as f:
@@ -158,11 +154,11 @@ def save_results_incremental(results, output_file):
 
 
 def predict_batch(model, tokenizer, molecules, device='cuda', output_file='result.json'):
-    """批量预测分子的 mRNA 转染效率 - 增量保存版本"""
+    """Two-pass prediction with resume support and periodic saves."""
     model.eval()
     results = []
     
-    # 检查是否有已有结果
+    # Resume from partial output if present
     if os.path.exists(output_file):
         try:
             with open(output_file, 'r', encoding='utf-8') as f:
@@ -179,20 +175,20 @@ def predict_batch(model, tokenizer, molecules, device='cuda', output_file='resul
     print(f"Starting Prediction for {len(molecules)} molecules")
     print(f"{'='*100}\n")
     
-    debug_count = 0  # 用于打印前几个的详细信息
-    detailed_count = 0  # 统计生成详细理由的分子数量
+    debug_count = 0  # verbose dumps for first few detailed passes
+    detailed_count = 0  # how many long rationales were generated
     
     for i, mol_data in enumerate(tqdm(molecules, desc="Predicting")):
         mol_id = mol_data['ID']
         
         try:
-            # 第一步：快速获取分数（不生成理由）
+            # Pass 1: quick score (short generation budget)
             prompt_quick = create_prediction_prompt(mol_data, need_detailed_reason=False)
             
             # Tokenize
             inputs = tokenizer(prompt_quick, return_tensors="pt", truncation=True, max_length=2048).to(device)
             
-            # Generate - 快速版本只需要50 tokens
+            # Generate (fast path)
             with torch.no_grad():
                 outputs = model.generate(
                     **inputs,
@@ -206,14 +202,14 @@ def predict_batch(model, tokenizer, molecules, device='cuda', output_file='resul
             # Decode
             response_quick = tokenizer.decode(outputs[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True)
             
-            # 提取分数
+            # Parse score from quick response
             score, _ = extract_score_and_reason(response_quick)
             
-            # 第二步：判断是否需要生成详细理由
+            # Pass 2: optional long rationale for extreme scores
             reason = ""
             if score >= 7 or score == 1:
                 detailed_count += 1
-                # 需要详细理由：重新生成
+                # Regenerate with detailed instructions
                 prompt_detailed = create_prediction_prompt(mol_data, need_detailed_reason=True)
                 inputs_detailed = tokenizer(prompt_detailed, return_tensors="pt", truncation=True, max_length=2048).to(device)
                 
@@ -230,7 +226,7 @@ def predict_batch(model, tokenizer, molecules, device='cuda', output_file='resul
                 response_detailed = tokenizer.decode(outputs_detailed[0][inputs_detailed['input_ids'].shape[1]:], skip_special_tokens=True)
                 score, reason = extract_score_and_reason(response_detailed)
                 
-                # 打印前5个需要详细理由的分子
+                # Debug trace for first few detailed generations
                 if debug_count < 5:
                     print(f"\n{'='*80}")
                     print(f"DEBUG - Molecule ID {mol_id} (Score={score}, Need detailed reason)")
@@ -239,7 +235,7 @@ def predict_batch(model, tokenizer, molecules, device='cuda', output_file='resul
                     print(f"{'='*80}\n")
                     debug_count += 1
             else:
-                # 不需要详细理由，reason留空
+                # Mid scores: skip rationale to save compute
                 reason = ""
             
             result = {
@@ -251,17 +247,17 @@ def predict_batch(model, tokenizer, molecules, device='cuda', output_file='resul
             
             results.append(result)
             
-            # 每10个分子保存一次
+            # Checkpoint every 10 molecules
             if len(results) % 10 == 0:
                 save_results_incremental(results, output_file)
             
-            # 每50个分子打印进度
+            # Progress log every 50 molecules
             if len(results) % 50 == 0:
                 print(f"\n[{len(results)}/{len(molecules) + len(results)}] Processed {len(results)} molecules")
                 print(f"  Last: ID={mol_id}, Score={score}, Reason={'Yes' if reason else 'No'}")
                 print(f"  Detailed reasons generated: {detailed_count}/{len(results)} ({100*detailed_count/len(results):.1f}%)")
                 
-                # 显示最近50个的分数分布
+                # Histogram for last 50 rows
                 recent_scores = [r['efficiency_score'] for r in results[-50:]]
                 score_dist = {s: recent_scores.count(s) for s in set(recent_scores)}
                 print(f"  Recent 50 score distribution: {dict(sorted(score_dist.items()))}")
@@ -276,7 +272,7 @@ def predict_batch(model, tokenizer, molecules, device='cuda', output_file='resul
             }
             results.append(result)
     
-    # 最终保存
+    # Final flush to disk
     save_results_incremental(results, output_file)
     
     return results
@@ -287,22 +283,22 @@ def main():
     data_file = os.path.join(base_dir, 'data', 'virtual_library_preprocessed.jsonl')
     output_file = os.path.join(base_dir, 'data', 'txgemma_verify_results.json')
 
-    # 检查数据文件
+    # Validate input path
     if not os.path.exists(data_file):
         print(f"✗ Data file not found: {data_file}")
         return
     
-    # 设置设备
+    # Device
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
     
-    # 加载数据
+    # Load molecules
     print("\n" + "="*100)
     print("Loading Data")
     print("="*100)
     molecules = load_preprocessed_data(data_file)
     
-    # 加载模型
+    # Load model from local cache only
     print("\n" + "="*100)
     print("Loading TXGemma-27B-Chat Model")
     print("="*100)
@@ -311,7 +307,7 @@ def main():
     model_name = local_model_path if os.path.exists(local_model_path) else "google/txgemma-27b-chat"
     print("Note: Using locally cached model (offline mode)")
     
-    # 设置离线模式
+    # Force offline Hub access
     os.environ['HF_HUB_OFFLINE'] = '1'
     os.environ['TRANSFORMERS_OFFLINE'] = '1'
     
@@ -329,7 +325,7 @@ def main():
     
     print(f"✓ Successfully loaded: {model_name}")
     
-    # 开始预测
+    # Run verify loop
     print("\n" + "="*100)
     print("Starting Predictions")
     print("="*100)
@@ -355,7 +351,7 @@ def main():
     print(f"  Total time: {elapsed/3600:.2f} hours ({elapsed/60:.1f} minutes)")
     print(f"  Average: {elapsed/len(molecules):.2f} seconds/molecule")
     
-    # 统计分数分布
+    # Score histogram
     score_dist = {}
     for r in results:
         score = r['efficiency_score']

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-使用 Google TXGemma-27B-Predict 模型预测虚拟分子库的 mRNA 转染效率
-按照用户指定的 prompt 格式
+TxGemma-27B-Chat: predict mRNA transfection efficiency for the virtual lipid library.
+Uses the user-specified conversational prompt format.
 """
 
 import json
@@ -13,9 +13,7 @@ import os
 from datetime import datetime
 
 def load_preprocessed_data(jsonl_file):
-    """
-    加载预处理后的 JSONL 数据
-    """
+    """Load preprocessed JSONL records."""
     print(f"Loading preprocessed data from: {jsonl_file}")
     
     data = []
@@ -28,10 +26,8 @@ def load_preprocessed_data(jsonl_file):
 
 
 def create_prediction_prompt(mol_data):
-    """
-    创建预测 prompt - 使用对话格式
-    """
-    # 对话模型格式的 prompt
+    """Build a Gemma-style turn prompt for one molecule."""
+    # Turn-based prompt string for Gemma-style models
     conversation = f"""<start_of_turn>user
 You are an expert in lipid nanoparticles and mRNA delivery. Please predict the mRNA transfection efficiency for the following lipid molecule.
 
@@ -63,13 +59,11 @@ Reason: [Your detailed analysis of the molecular structure and its impact on tra
 
 
 def extract_score_and_reason(response):
-    """
-    从模型响应中提取效率分数和理由
-    """
+    """Parse efficiency score (1-10) and free-text rationale from model output."""
     score = None
     reason = ""
     
-    # 提取分数
+    # Score patterns
     score_patterns = [
         r'[Ee]fficiency\s+[Ss]core\s*[:：]\s*(\d+)',
         r'[Ss]core\s*[:：]\s*(\d+)',
@@ -85,13 +79,13 @@ def extract_score_and_reason(response):
             if 1 <= score <= 10:
                 break
     
-    # 如果没找到明确分数，尝试找任何1-10的数字
+    # Fallback: first integer in 1..10
     if score is None:
         numbers = re.findall(r'\b([1-9]|10)\b', response)
         if numbers:
             score = int(numbers[0])
     
-    # 提取理由
+    # Rationale patterns
     reason_patterns = [
         r'[Rr]eason\s*[:：]\s*(.+?)(?=\n\n|\Z)',
         r'[Rr]ationale\s*[:：]\s*(.+?)(?=\n\n|\Z)',
@@ -104,13 +98,13 @@ def extract_score_and_reason(response):
             reason = match.group(1).strip()
             break
     
-    # 如果没有明确的理由部分，使用整个响应（去掉分数行）
+    # If no rationale block, drop score lines and keep the rest
     if not reason:
         lines = response.split('\n')
         reason_lines = [line for line in lines if not re.search(r'[Ss]core\s*[:：]', line)]
         reason = '\n'.join(reason_lines).strip()
     
-    # 默认分数
+    # Default mid score if parsing fails
     if score is None:
         score = 5
         reason = f"[WARNING: No clear score found in response, defaulting to 5]\n\n{reason}"
@@ -119,9 +113,7 @@ def extract_score_and_reason(response):
 
 
 def predict_batch(model, tokenizer, molecules, device='cuda'):
-    """
-    批量预测分子的 mRNA 转染效率
-    """
+    """Run inference over all molecules and collect structured results."""
     model.eval()
     results = []
     
@@ -133,7 +125,7 @@ def predict_batch(model, tokenizer, molecules, device='cuda'):
         mol_id = mol_data['ID']
         
         try:
-            # 构建 prompt
+            # Build prompt string
             prompt = create_prediction_prompt(mol_data)
             
             # Tokenize
@@ -153,7 +145,7 @@ def predict_batch(model, tokenizer, molecules, device='cuda'):
             # Decode
             response = tokenizer.decode(outputs[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True)
             
-            # 提取分数和理由
+            # Parse score and rationale
             score, reason = extract_score_and_reason(response)
             
             result = {
@@ -165,12 +157,12 @@ def predict_batch(model, tokenizer, molecules, device='cuda'):
             
             results.append(result)
             
-            # 每50个分子打印进度
+            # Progress log every 50 molecules
             if (i + 1) % 50 == 0:
                 print(f"\n[{i+1}/{len(molecules)}] Processed {i+1} molecules")
                 print(f"  Last: ID={mol_id}, Score={score}")
                 
-                # 显示最近50个的分数分布
+                # Histogram for the last 50 predictions
                 recent_scores = [r['efficiency_score'] for r in results[-50:]]
                 score_dist = {s: recent_scores.count(s) for s in set(recent_scores)}
                 print(f"  Recent 50 score distribution: {dict(sorted(score_dist.items()))}")
@@ -193,23 +185,23 @@ def main():
     data_file = os.path.join(base_dir, 'data', 'virtual_library_preprocessed.jsonl')
     output_file = os.path.join(base_dir, 'data', 'txgemma_predict_results.json')
     
-    # 检查数据文件
+    # Ensure input exists
     if not os.path.exists(data_file):
         print(f"✗ Data file not found: {data_file}")
         print("Please run preprocess_data.py first")
         return
     
-    # 设置设备
+    # Device
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
     
-    # 加载数据
+    # Load molecules
     print("\n" + "="*100)
     print("Loading Data")
     print("="*100)
     molecules = load_preprocessed_data(data_file)
     
-    # 加载模型
+    # Load weights
     print("\n" + "="*100)
     print("Loading TXGemma-27B-Predict Model")
     print("="*100)
@@ -254,7 +246,7 @@ def main():
                 print("\n✗ All model options failed!")
                 return
     
-    # 开始预测
+    # Run batch prediction
     print("\n" + "="*100)
     print("Starting Predictions")
     print("="*100)
@@ -279,14 +271,14 @@ def main():
     print(f"  Total time: {elapsed/3600:.2f} hours ({elapsed/60:.1f} minutes)")
     print(f"  Average: {elapsed/len(molecules):.2f} seconds/molecule")
     
-    # 按照 efficiency_score 从大到小排序
+    # Sort by predicted score (descending)
     print("\n" + "="*100)
     print("Sorting by Efficiency Score (High to Low)")
     print("="*100)
     
     results_sorted = sorted(results, key=lambda x: x['efficiency_score'], reverse=True)
     
-    # 统计分数分布
+    # Histogram over full run
     score_dist = {}
     for r in results_sorted:
         score = r['efficiency_score']
@@ -299,14 +291,14 @@ def main():
         bar = '█' * int(percentage / 2)
         print(f"  Score {score:2d}: {count:4d} molecules ({percentage:5.1f}%) {bar}")
     
-    # 保存结果到 result.json
+    # Write sorted JSON
     print(f"\nSaving results to: {output_file}")
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results_sorted, f, indent=2, ensure_ascii=False)
     
     print(f"✓ Results saved successfully")
     
-    # 显示 Top 10
+    # Print leaderboard preview
     print("\n" + "="*100)
     print("Top 10 Molecules by Efficiency Score")
     print("="*100)
@@ -317,7 +309,7 @@ def main():
         print(f"  SMILES: {result['SMILES'][:80]}...")
         print(f"  Reason: {result['reason'][:200]}...")
     
-    # 保存统计摘要
+    # Optional text summary alongside JSON
     summary_file = output_file.replace('.json', '_summary.txt')
     with open(summary_file, 'w', encoding='utf-8') as f:
         f.write("="*100 + "\n")
