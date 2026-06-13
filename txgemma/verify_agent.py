@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
 TxGemma-27B-Chat verify pass: two-stage scoring with incremental JSON saves.
+
+NOTE: An embedding-space variant (no decode/re-encode between passes) is
+available at txgemma/embedding_agent.py. It passes Pass-1 hidden states
+directly as inputs_embeds to Pass 2, removing the tokenisation bottleneck.
 """
 
 import json

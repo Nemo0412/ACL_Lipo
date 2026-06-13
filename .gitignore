@@ -4,9 +4,9 @@ checkpoint*
 *.ckpt
 checkpoints/
 
-# SLURM job scripts (server-specific, contain credentials)
-*.sbatch
+# SLURM job scripts
 monitor_job.sh
+# Note: *.sbatch files are tracked (no credentials embedded)
 
 # Generated training data (large, reproducible via build_dataset.py)
 data/finetune/qwen_labels.json
@@ -49,3 +49,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.pdf
+
+# Local secrets (Hugging Face token file for batch jobs)
+.hf_token
